@@ -9,7 +9,8 @@ if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
     message(STATUS "Need conan.cmake")
 endif()
 
-include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+set(BASE_CMAKE_BINARY_DIR "./build")
+include(${BASE_CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
 include_directories(./include)
@@ -21,7 +22,7 @@ file(GLOB SRC_FILES
 "${PROJECT_SOURCE_DIR}/src/*.cc"
 )
 
-add_executable(${CMAKE_PROJECT_NAME} ${SRC_FILES})
+add_executable(${CMAKE_PROJECT_NAME} ${SRC_FILES} src/texture2d.cpp include/texture2d.h include/stopwatch.h include/shader_source.h include/vertex_data.h)
 
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE glfw3)
 
