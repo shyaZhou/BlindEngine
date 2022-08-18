@@ -22,9 +22,17 @@ file(GLOB SRC_FILES
 "${PROJECT_SOURCE_DIR}/src/*.cc"
 )
 
-add_executable(${CMAKE_PROJECT_NAME} ${SRC_FILES} src/texture2d.cpp include/texture2d.h include/stopwatch.h include/shader_source.h include/vertex_data.h)
+file(GLOB COMPRESS_IMG_SRC_FILES
+"${PROJECT_SOURCE_DIR}/tools/compress_img/*.cpp"
+"${PROJECT_SOURCE_DIR}/tools/compress_img/*.c"
+"${PROJECT_SOURCE_DIR}/tools/compress_img/*.cc"
+)
+
+add_executable(${CMAKE_PROJECT_NAME} ${SRC_FILES})
+add_executable(compress_img ${COMPRESS_IMG_SRC_FILES} "${PROJECT_SOURCE_DIR}/src/texture2d.cpp")
 
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE glfw3)
+target_link_libraries(compress_img PRIVATE glfw3)
 
 target_compile_features(${CMAKE_PROJECT_NAME} PRIVATE cxx_std_20)
     
